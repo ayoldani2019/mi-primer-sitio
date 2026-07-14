@@ -1,0 +1,229 @@
+/* CONFIGURACIÓN GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', Arial, sans-serif;
+    background-color: #020205;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* ENCABEZADO FIJO */
+.visor-superior {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background-color: rgba(15, 23, 42, 0.95);
+    border-bottom: 3px solid #a855f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+    backdrop-filter: blur(4px);
+}
+
+.visor-superior h1 {
+    font-size: 1.5rem;
+    color: #e9d5ff;
+    text-shadow: 0 0 10px #a855f7;
+}
+
+/* PANEL EDUCATIVO */
+.seccion-educativa {
+    margin-top: 85px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.tarjeta-datos {
+    background-color: #0f172a;
+    border: 3px solid #38bdf8;
+    border-radius: 20px;
+    padding: 1.5rem;
+    max-width: 850px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(56, 189, 248, 0.15);
+}
+
+.tarjeta-datos h3 {
+    color: #38bdf8;
+    margin-bottom: 0.4rem;
+    font-size: 1.2rem;
+}
+
+.tarjeta-datos p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 1.2rem;
+}
+
+.leyenda-planetas {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tag-planeta {
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+}
+
+.color-mercurio { border-color: #94a3b8; }
+.color-venus    { border-color: #fef08a; }
+.color-tierra   { border-color: #38bdf8; }
+.color-marte    { border-color: #f87171; }
+.color-jupiter  { border-color: #fdba74; }
+.color-saturno  { border-color: #fde047; }
+.color-urano    { border-color: #a5f3fc; }
+.color-neptuno  { border-color: #2563eb; }
+
+/* ESPACIO DE PANTALLA COMPLETA */
+.espacio-infinito {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #0f172a 0%, #020208 80%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-top: 2px dashed #334155;
+}
+
+/* EL SOL */
+.sol {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    background: radial-gradient(circle, #fef08a 20%, #f97316 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 55px #f97316, 0 0 20px #ef4444;
+    z-index: 10;
+}
+
+/* CONFIGURACIÓN DE ÓRBITAS */
+.orbita {
+    position: absolute;
+    border: 1px dashed rgba(148, 163, 184, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    will-change: transform;
+    pointer-events: none; 
+    transition: border-color 0.25s ease, border-style 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Tamaños de las órbitas y tiempos de giro */
+.orbita-mercurio { width: 190px; height: 190px; animation: rotarPlaneta 4s linear infinite; }
+.orbita-venus    { width: 270px; height: 270px; animation: rotarPlaneta 7s linear infinite; }
+.orbita-tierra   { width: 360px; height: 360px; animation: rotarPlaneta 10s linear infinite; }
+.orbita-marte    { width: 450px; height: 450px; animation: rotarPlaneta 14s linear infinite; }
+.orbita-jupiter  { width: 590px; height: 590px; animation: rotarPlaneta 22s linear infinite; }
+.orbita-saturno  { width: 750px; height: 750px; animation: rotarPlaneta 32s linear infinite; }
+.orbita-urano    { width: 880px; height: 880px; animation: rotarPlaneta 45s linear infinite; }
+.orbita-neptuno  { width: 990px; height: 990px; animation: rotarPlaneta 60s linear infinite; }
+
+/* Pausar órbita al hacer hover */
+.orbita:has(.planeta:hover) {
+    animation-play-state: paused !important;
+}
+
+/* ILUMINACIÓN DE ÓRBITAS AL HACER HOVER */
+.orbita-mercurio:has(.mercurio:hover) { border-color: #94a3b8; border-style: solid; box-shadow: inset 0 0 10px rgba(148, 163, 184, 0.2); }
+.orbita-venus:has(.venus:hover)       { border-color: #facc15; border-style: solid; box-shadow: inset 0 0 10px rgba(250, 204, 21, 0.2); }
+.orbita-tierra:has(.tierra:hover)     { border-color: #38bdf8; border-style: solid; box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.2); }
+.orbita-marte:has(.marte:hover)       { border-color: #ef4444; border-style: solid; box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.2); }
+.orbita-jupiter:has(.jupiter:hover)   { border-color: #f97316; border-style: solid; box-shadow: inset 0 0 12px rgba(249, 115, 22, 0.2); }
+.orbita-saturno:has(.saturno:hover)   { border-color: #fde047; border-style: solid; box-shadow: inset 0 0 12px rgba(253, 224, 71, 0.2); }
+.orbita-urano:has(.urano:hover)       { border-color: #06b6d4; border-style: solid; box-shadow: inset 0 0 10px rgba(6, 182, 212, 0.2); }
+.orbita-neptuno:has(.neptuno:hover)   { border-color: #3b82f6; border-style: solid; box-shadow: inset 0 0 10px rgba(59, 130, 246, 0.2); }
+
+/* CONFIGURACIÓN DE PLANETAS */
+.planeta {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto; 
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.25), box-shadow 0.25s ease;
+    z-index: 100;
+}
+
+/* Efecto de expansión global */
+.planeta:hover {
+    transform: scale(1.7); 
+}
+
+/* ESTILOS Y RESPLANDORES INDIVIDUALES */
+.mercurio { width: 20px; height: 20px; background-color: #94a3b8; top: -10px; }
+.mercurio:hover { box-shadow: 0 0 25px 8px #94a3b8; }
+
+.venus    { width: 28px; height: 28px; background-color: #fef08a; top: -14px; }
+.venus:hover { box-shadow: 0 0 25px 8px #facc15; }
+
+.tierra   { 
+    width: 32px; height: 32px; background-color: #38bdf8; top: -16px; 
+    display: flex; justify-content: center; align-items: center;
+}
+.tierra:hover { box-shadow: 0 0 25px 8px #38bdf8; }
+.luna     { position: absolute; width: 8px; height: 8px; background-color: #e2e8f0; border-radius: 50%; left: -16px; top: -5px; }
+
+.marte    { width: 24px; height: 24px; background-color: #f87171; top: -12px; }
+.marte:hover { box-shadow: 0 0 25px 8px #ef4444; }
+
+.jupiter  { width: 56px; height: 56px; background: linear-gradient(#fdba74, #f97316); top: -28px; }
+.jupiter:hover { box-shadow: 0 0 35px 10px #f97316; }
+
+.saturno  { 
+    width: 46px; height: 46px; background-color: #fde047; top: -23px;
+    display: flex; justify-content: center; align-items: center;
+}
+.saturno:hover { box-shadow: 0 0 30px 10px #fde047; }
+.anillo-saturno { 
+    position: absolute; width: 76px; height: 14px; border: 3px solid #ca8a04; border-radius: 50%; transform: rotate(-10deg); 
+    transition: all 0.25s ease;
+}
+.saturno:hover .anillo-saturno {
+    width: 90px;
+    height: 18px;
+    border-color: #fef08a;
+}
+
+.urano    { width: 38px; height: 38px; background-color: #a5f3fc; top: -19px; }
+.urano:hover { box-shadow: 0 0 25px 8px #06b6d4; }
+
+.neptuno  { width: 36px; height: 36px; background-color: #2563eb; top: -18px; }
+.neptuno:hover { box-shadow: 0 0 25px 8px #3b82f6; }
+
+/* SECCIÓN DE CIERRE */
+.base-cierre {
+    height: 150px;
+    background-color: #0b0f19;
+    padding-top: 2rem;
+}
+
+.mensaje-final-sticky {
+    position: sticky;
+    top: 500px;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* ANIMACIÓN DE TRASLACIÓN */
+@keyframes rotarPlaneta {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
